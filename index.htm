@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<link rel = "stylesheet" href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+	<link rel="stylesheet" type="text/css" href="/res/style.css">
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+	<script src = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+	<script src = "angular-app.js"></script>
+
+</head>
+
+<body>
+
+<div ng-app="booktips" style="padding: 5% 10%">
+
+<div ng-controller="bookSearchController" layout="column" ng-cloak>
+  <md-content class="md-padding">
+    <form ng-submit="$event.preventDefault()">
+      <md-autocomplete id="autocomplete"
+          md-selected-item="selectedItem"
+          md-search-text-change="searchTextChange(searchText)"
+          md-search-text="searchText"
+          md-selected-item-change="selectedItemChange(item)"
+          md-items="item in suggestions"
+          md-item-text="item"
+          md-min-length="1"
+          placeholder="search for books here">
+        <md-item-template>
+          <span md-highlight-text="searchText" md-highlight-flags="^i">{{item}}</span>
+        </md-item-template>
+      </md-autocomplete>
+      <br/>
+    </form>
+  </md-content>
+
+  <md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="50" layout="column" ng-repeat="i in dummyArr">
+
+      <md-card md-theme="{{ defaultTheme }}" md-theme-watch ng-repeat="book in books[i] track by $index">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{book.title}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout="row" layout-align="space-between">
+          <div class="md-media-xl card-media">
+          	<img ng-src="{{book.thumbnail}}">
+          </div>
+
+          <md-card-actions layout="column">
+            <md-button class="md-icon-button" class="md-primary md-raised" ng-click="moreInfo(book.id)" aria-label="Settings">
+              <md-icon md-svg-icon="/res/menu.svg"></md-icon>
+            </md-button>
+          </md-card-actions>
+        </md-card-content>
+      </md-card>
+
+    </div>
+  </md-content>
+
+</div>
+
+ 
+</div>
+
+
+</body>
+</html>
