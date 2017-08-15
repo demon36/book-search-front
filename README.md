@@ -1,4 +1,4 @@
 # book-search-front
 
-npm install
-node serve.js
+* npm install
+* node serve.js
